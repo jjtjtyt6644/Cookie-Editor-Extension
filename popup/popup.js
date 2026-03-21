@@ -650,6 +650,13 @@ function showToast(message, type = 'info') {
 // ─── Bind misc events ────────────────────────────────────
 function bindEvents() {
   updateImportPlaceholder();
+
+  // GitHub link — extensions can't open links with target=_blank normally
+  document.querySelector('.footer-github').addEventListener('click', e => {
+    e.preventDefault();
+    chrome.tabs.create({ url: 'https://github.com/jjtjtyt6644/Cookie-Editor-Extension' });
+  });
+
   // Background tab updates
   chrome.runtime.onMessage.addListener(msg => {
     if (msg.type === 'TAB_UPDATED' || msg.type === 'TAB_ACTIVATED') {
